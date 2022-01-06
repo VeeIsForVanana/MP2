@@ -98,10 +98,13 @@ def code_checker(player_input, code):
     :return: Returns two integers representing red and white values
     """
     red, white = 0, 0
+    red_dict = {}
+    for i in code:
+        red_dict[i] = red_dict.get(i, 0) + 1
     for i in range(len(player_input)):
-        red += int(player_input[i] == code[i])      # I am far too proud of this addition
-    for color in set(code):
-        white += int(color in player_input)         # I am far too proud of this addition
+        red += int(player_input[i] == code[i])      # I am far too proud of this addition - v
+        red_dict[player_input[i]] -= int(player_input[i] == code[i])
+        white += int(player_input[i] in code and red_dict[player_input[i]] != 0)
     return red, white
 
 def lifeline1(code):
@@ -126,42 +129,6 @@ def lifeline2(code):
     print(f"The element {code[position - 1]} exists at position {position}.")
     return position - 1
 
-def game_loop(win_status, turn_number, given_code, valid_colors, color_set):
-    """
-    Player will be asked to input their guess and feedback will be given.
-    """
-    while win_status == False and turn_number <= 10:
-        player_input = None
-        red = 0
-        white = 0
-        
-        while player_input is None:
-            print("Please enter a color code with colors from 1 to 8")
-            player_input = code_input_validation(len(given_code), [chr(i + ord("0")) for i in valid_colors], input())
-
-        print("Input valid")
-
-        for i in range(length):
-            if player_input[i] == given_code[i]:
-                red += 1
-
-        for i in color_array:
-            if i in player_input:
-                white += 1
-        
-        #Computer feedback for each guess
-        if red == len(given_code):
-            win_status = True
-            print("Congratulations!")
-        else:
-            print("Red:", red, "\nWhite:", white)
-
-        turn_number += 1
-    
-    #Game over if after 10 turns, player still hasn't won
-    if win_status == False:
-        print("Game over. Better luck next time!\nYour code was", code + ".")
-
 
 if __name__ == "__main__":
     usable_colors = (1, 2, 3, 4, 5, 6, 7, 8)
@@ -175,6 +142,8 @@ if __name__ == "__main__":
     code = code_randomizer(length, set_repeat())
 
     visible_code = visible_code_generator(length)
+
+    print(code)
 
     while turns <= 10 and not win:
         # Accept and validate player input
