@@ -9,8 +9,10 @@ class Handler(tcod.event.EventDispatch):
 
     def handle_events(self, event):
         print(event)
-        self.dispatch(event)
-        return self
+        new_handler = self.dispatch(event)
+        if new_handler is None:
+            new_handler = self
+        return new_handler
 
     def on_render(self):
         print("on_render called for Handler... oops")
@@ -29,7 +31,7 @@ class MenuHandler(Handler):
         elif key == tcod.event.K_UP:
             self.cursor_position = max(1, self.cursor_position - 1)
         elif key == tcod.event.K_DOWN:
-            self.cursor_position = min(2, self.cursor_position + 1)
+            self.cursor_position = min(3, self.cursor_position + 1)
         return None
     
     def on_render(self):
@@ -44,9 +46,15 @@ class MenuHandler(Handler):
         self.console.print(
             constants.window_width // 2 - 2, 
             printing_base + 3, 
-            "Quit",
+            "Help",
             fg = constants.black if self.cursor_position == 2 else constants.white,
             bg = constants.white if self.cursor_position == 2 else constants.black)
+        self.console.print(
+            constants.window_width // 2 - 2, 
+            printing_base + 4, 
+            "Quit",
+            fg = constants.black if self.cursor_position == 3 else constants.white,
+            bg = constants.white if self.cursor_position == 3 else constants.black)
         self.console.draw_frame(
             0, 
             (constants.window_height // 5) * 4, 
