@@ -4,7 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="f8105da0-8e51-4a98-a3d2-a1ec9e394fb8" name="Changes" comment="Committing Pau's work on the base of mastermind. Altered some function documentation to improve readability and comprehension. Renamed main.py to gui.py to be more intuitive in choice. Mastermind is now functioning with all required functionalities. Debugging still needed." />
+    <list default="true" id="f8105da0-8e51-4a98-a3d2-a1ec9e394fb8" name="Changes" comment="Committing Pau's work on the base of mastermind. Altered some function documentation to improve readability and comprehension. Renamed main.py to gui.py to be more intuitive in choice. Mastermind is now functioning with all required functionalities. Debugging still needed.">
+      <change beforePath="$PROJECT_DIR$/gui.py" beforeDir="false" afterPath="$PROJECT_DIR$/gui.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/handler.py" beforeDir="false" afterPath="$PROJECT_DIR$/handler.py" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -104,6 +107,7 @@
       <workItem from="1640491514627" duration="222000" />
       <workItem from="1640517932308" duration="157000" />
       <workItem from="1641221719074" duration="10514000" />
+      <workItem from="1641560568226" duration="19000" />
     </task>
     <task id="LOCAL-00001" summary="First commit.">
       <created>1640517969884</created>

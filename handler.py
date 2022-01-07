@@ -70,3 +70,7 @@ class MenuHandler(Handler):
 class MainGameHandler(Handler):
     def on_render(self):
         self.console.print(x = 0, y = 0, string = "NOT YET IMPLEMENTED")
+        return self.console
+
+    def ev_keydown(self):
+        return None

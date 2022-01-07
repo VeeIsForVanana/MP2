@@ -46,6 +46,7 @@ def main():
         current_handler = handler.MenuHandler(console)
 
         while True:
+            console.clear()
             console = current_handler.on_render()
             terminal.present(console)
 
