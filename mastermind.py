@@ -143,8 +143,6 @@ if __name__ == "__main__":
 
     visible_code = visible_code_generator(length)
 
-    print(code)
-
     while turns <= 10 and not win:
         # Accept and validate player input
         player_input = None
