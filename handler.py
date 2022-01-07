@@ -32,6 +32,9 @@ class MenuHandler(Handler):
             self.cursor_position = max(1, self.cursor_position - 1)
         elif key == tcod.event.K_DOWN:
             self.cursor_position = min(3, self.cursor_position + 1)
+        elif key == tcod.event.K_RETURN:
+            if self.cursor_position == 1:
+                return MainGameHandler(self.console)
         return None
     
     def on_render(self):
@@ -62,3 +65,8 @@ class MenuHandler(Handler):
             constants.window_height // 5, 
             "Helpful Tip!")
         return self.console
+
+
+class MainGameHandler(Handler):
+    def on_render(self):
+        self.console.print(x = 0, y = 0, string = "NOT YET IMPLEMENTED")
