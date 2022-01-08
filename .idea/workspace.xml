@@ -4,10 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="f8105da0-8e51-4a98-a3d2-a1ec9e394fb8" name="Changes" comment="BASE FUNCTIONALITIES WORKING. Lifeline awaiting implementation.">
+    <list default="true" id="f8105da0-8e51-4a98-a3d2-a1ec9e394fb8" name="Changes" comment="Lifelines implemented.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/constants.py" beforeDir="false" afterPath="$PROJECT_DIR$/constants.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/handler.py" beforeDir="false" afterPath="$PROJECT_DIR$/handler.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -111,7 +109,7 @@
       <workItem from="1640517932308" duration="157000" />
       <workItem from="1641221719074" duration="10514000" />
       <workItem from="1641560568226" duration="19000" />
-      <workItem from="1641609189329" duration="21736000" />
+      <workItem from="1641609189329" duration="23008000" />
     </task>
     <task id="LOCAL-00001" summary="First commit.">
       <created>1640517969884</created>
@@ -141,7 +139,14 @@
       <option name="project" value="LOCAL" />
       <updated>1641630119652</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="Lifelines implemented.">
+      <created>1641635102434</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1641635102435</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -169,11 +174,12 @@
     <MESSAGE value="Committing Pau's work on the base of mastermind. Altered some function documentation to improve readability and comprehension. Renamed main.py to gui.py to be more intuitive in choice. Mastermind is now functioning with all required functionalities. Debugging still needed." />
     <MESSAGE value="Finished game menu. Code now reliably set up inside gui.py" />
     <MESSAGE value="BASE FUNCTIONALITIES WORKING. Lifeline awaiting implementation." />
-    <option name="LAST_COMMIT_MESSAGE" value="BASE FUNCTIONALITIES WORKING. Lifeline awaiting implementation." />
+    <MESSAGE value="Lifelines implemented." />
+    <option name="LAST_COMMIT_MESSAGE" value="Lifelines implemented." />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/MP2$mastermind.coverage" NAME="mastermind Coverage Results" MODIFIED="1641629009824" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/MP2$main.coverage" NAME="main Coverage Results" MODIFIED="1641222989459" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/MP2$gui.coverage" NAME="gui Coverage Results" MODIFIED="1641634875679" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/MP2$gui.coverage" NAME="gui Coverage Results" MODIFIED="1641634926149" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
 </project>
