@@ -3,7 +3,7 @@
 # Measurements
 
 window_height = 26
-window_width = 70
+window_width = 90
 
 # Colors
 # To be used in game

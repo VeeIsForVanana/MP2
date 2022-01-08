@@ -116,6 +116,8 @@ class MainGameHandler(Handler):
                     else:
                         temp_guess = [str(i + 1) for i in self.edit_guess][0: self.code_length]
                     self.current_guess = ''.join(temp_guess)
+                elif self.active_lifeline:
+                    self.current_guess = str(self.edit_guess[0] + 1)
             self.cursor_location = 0
         if key == tcod.event.K_RIGHT:
             self.cursor_location += 1
@@ -148,33 +150,58 @@ class MainGameHandler(Handler):
         else:
             self.cursor_location %= self.code_length
             if self.current_guess is None:
+                if self.active_lifeline:                                    # When lifeline active and no input
+                    self.edit_guess[0] %= 2
                 return None
             else:
                 if any(i == '9' for i in self.current_guess) and not all(i == '9' for i in self.current_guess):
                     # Validates code, checks for lifeline where there shouldn't be
-                    message = "Oops you used a lifeline code where you maybe shouldn't have..."
-                    return None     # Ends function call to prevent the rest from executing
-                elif all(i == '9' for i in self.current_guess):
-                    message = "HELP"
-                elif self.current_guess == self.code:
+                    message = "Oops! You used a lifeline code where you maybe shouldn't have..."
+                elif all(i == '9' for i in self.current_guess) and not (self.lifeline1 and self.lifeline2): # Lifelines activated
+                    message = "Choose a lifeline using the code input. There is no going back."
+                    self.active_lifeline = True
+                    self.code_length, self.temporary_length = self.temporary_length, self.code_length
+                elif all(i == '9' for i in self.current_guess) and (self.lifeline1 and self.lifeline2):
+                    message = "You have already used up all your lifelines."
+                elif self.active_lifeline:                                  # Lifeline active and input given
+                    lifeline_code = [9 for i in range(8)]
+                    if self.current_guess == "1" and not self.lifeline1:
+                        message = ms.lifeline1(self.code)
+                        self.lifeline1 = True
+                        self.past_guesses[self.turn_counter] = lifeline_code
+                        self.turn_iterator()
+                    elif self.current_guess == "2" and not self.lifeline2:
+                        message, index = ms.lifeline2(self.code)
+                        self.lifeline2 = True
+                        self.past_guesses[self.turn_counter] = lifeline_code
+                        self.turn_iterator()
+                        self.past_guesses[self.turn_counter] = lifeline_code
+                        self.turn_iterator()
+                    elif self.current_guess == "1" and self.lifeline1:
+                        message = "You have already used this lifeline"
+                    elif self.current_guess == "2" and self.lifeline2:
+                        message = "You have already used this lifeline"
+                    self.code_length, self.temporary_length = self.temporary_length, self.code_length
+                    self.active_lifeline = False
+                elif self.current_guess == self.code:                       # Player guesses correct code
                     self.win_state = True
                     message = "You won!"
-                else:
+                else:                                                       # Player enters an incorrect guess
                     red, white = ms.code_checker(self.current_guess, self.code)
                     to_red = f"{tcod.COLCTRL_FORE_RGB:c}{constants.red[0]:c}{constants.red[1]:c}{constants.red[2]:c}"
                     to_white = f"{tcod.COLCTRL_FORE_RGB:c}{constants.white[0]:c}{constants.white[1]:c}{constants.white[2]:c}"
                     message = f"{to_red}RED: {red}, {to_white}WHITE {white}"
+                    self.past_guesses[self.turn_counter] = self.edit_guess
+                    self.turn_iterator()
 
                 # Resets relevant variables for reuse in next turn
                 if not self.message_log[len(self.message_log) - 1] == message:  # Checks if the message repeats
                     self.message_log.append(message)
                 self.current_guess = None
-                self.past_guesses[self.turn_counter] = self.edit_guess
                 self.edit_guess = [0 for i in range(8)]
 
                 # Iterates turn
 
-                self.turn_iterator()
         return None
 
     def on_render(self):
@@ -279,4 +306,4 @@ class MainGameHandler(Handler):
             self.console.print(1, 6 + (2 * i), "* * * * * * * *", fg=constants.d_gray)
 
         # Renders the new frame containing the message log
-        self.console.draw_frame(17, 0, 53, 26, "THE MASTERMIND")
+        self.console.draw_frame(17, 0, 73, 26, "THE MASTERMIND")
