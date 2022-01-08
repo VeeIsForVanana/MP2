@@ -101,6 +101,8 @@ class MainGameHandler(Handler):
     def ev_keydown(self, event):
         key = event.sym
         if key == tcod.event.K_ESCAPE:
+            if self.win_state:
+                return MenuHandler(self.console)
             raise SystemExit()
         if key == tcod.event.K_RETURN:
             if self.state == game_state.game_setup:
@@ -120,13 +122,17 @@ class MainGameHandler(Handler):
                     self.current_guess = str(self.edit_guess[0] + 1)
             self.cursor_location = 0
         if key == tcod.event.K_RIGHT:
-            self.cursor_location += 1
+            if not self.win_state:
+                self.cursor_location += 1
         if key == tcod.event.K_LEFT:
-            self.cursor_location -= 1
+            if not self.win_state:
+                self.cursor_location -= 1
         if key == tcod.event.K_UP and self.state == game_state.game_play:
-            self.edit_guess[self.cursor_location] = (self.edit_guess[self.cursor_location] + 1) % 9
+            if not self.win_state:
+                self.edit_guess[self.cursor_location] = (self.edit_guess[self.cursor_location] + 1) % 9
         if key == tcod.event.K_DOWN and self.state == game_state.game_play:
-            self.edit_guess[self.cursor_location] = (self.edit_guess[self.cursor_location] - 1) % 9
+            if not self.win_state:
+                self.edit_guess[self.cursor_location] = (self.edit_guess[self.cursor_location] - 1) % 9
         return None
 
     def turn_iterator(self):
@@ -185,7 +191,7 @@ class MainGameHandler(Handler):
                     self.active_lifeline = False
                 elif self.current_guess == self.code:                       # Player guesses correct code
                     self.win_state = True
-                    message = "You won!"
+                    message = f"You won in {self.turn_counter + 1} turns! Press ESC to return to menu."
                 else:                                                       # Player enters an incorrect guess
                     red, white = ms.code_checker(self.current_guess, self.code)
                     to_red = f"{tcod.COLCTRL_FORE_RGB:c}{constants.red[0]:c}{constants.red[1]:c}{constants.red[2]:c}"
