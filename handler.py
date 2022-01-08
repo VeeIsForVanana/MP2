@@ -147,7 +147,8 @@ class MainGameHandler(Handler):
             self.message_log.clear()
             if self.code_length is None:  # If the game does not have a code_length yet
                 self.cursor_location %= 5
-                self.message_log.append("Please select the length of your code")
+                self.message_log.append("Please select the length of your code \n "
+                                        "(Colors on the left not indicative of code palette)")
             elif self.code_repeat is None:  # If the game does not have a code_repeat setting yet
                 self.cursor_location %= 2
                 self.message_log.append("Shall we allow the code to repeat?")
@@ -233,10 +234,20 @@ class MainGameHandler(Handler):
                 for i in range(3, 8):
                     self.console.print(
                         printing_base[0] + (2 * i - 6),
-                        printing_base[1] + 2,
+                        printing_base[1] + 3,
                         string=str(i + 1),
                         bg=constants.white if i == self.cursor_location + 3 else constants.black,
                         fg=constants.black if i == self.cursor_location + 3 else constants.white)
+                for i in range(10):
+                    for j in range(self.cursor_location + 4):
+                        self.console.print(
+                            1 + (2 * j),
+                            6 + (2 * i),
+                            "*",
+                            bg=constants.code_colors[((i + j) % (self.cursor_location + 4)) + 1],
+                            fg=constants.black if constants.code_colors[((i + j) % (self.cursor_location + 4)) + 1] !=
+                               constants.black else constants.white
+                        )
             elif self.code_repeat is None:  # If the game has not yet decided repeat or not (STEP 2)
                 yes_no = ["Yes", "No"]
                 for i in range(len(yes_no)):
