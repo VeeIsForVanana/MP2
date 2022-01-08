@@ -97,11 +97,12 @@ class MainGameHandler(Handler):
         self.lifeline2 = False
         self.active_lifeline = False
         self.temporary_length = 1
+        self.end_state = False
 
     def ev_keydown(self, event):
         key = event.sym
         if key == tcod.event.K_ESCAPE:
-            if self.win_state:
+            if self.end_state:
                 return MenuHandler(self.console)
             raise SystemExit()
         if key == tcod.event.K_RETURN:
@@ -111,27 +112,28 @@ class MainGameHandler(Handler):
                 elif self.code_repeat is None:
                     self.code_repeat = ("yes", "no")[self.cursor_location]  # Selects from a tuple, avoiding if-else
             elif self.state == game_state.game_play:
-                if self.current_guess is None and not self.active_lifeline:  # Registers the input guess as current_guess, validation takes place in update_game
-                    if not any([i != 8 for i in self.edit_guess[0: self.code_length]]):
-                        self.edit_guess = [9 for i in range(8)]
-                        temp_guess = [str(9) for i in range(8)]
-                    else:
-                        temp_guess = [str(i + 1) for i in self.edit_guess][0: self.code_length]
-                    self.current_guess = ''.join(temp_guess)
-                elif self.active_lifeline:
-                    self.current_guess = str(self.edit_guess[0] + 1)
+                if not self.end_state:
+                    if self.current_guess is None and not self.active_lifeline:  # Registers the input guess as current_guess, validation takes place in update_game
+                        if not any([i != 8 for i in self.edit_guess[0: self.code_length]]):
+                            self.edit_guess = [9 for i in range(8)]
+                            temp_guess = [str(9) for i in range(8)]
+                        else:
+                            temp_guess = [str(i + 1) for i in self.edit_guess][0: self.code_length]
+                        self.current_guess = ''.join(temp_guess)
+                    elif self.active_lifeline:
+                        self.current_guess = str(self.edit_guess[0] + 1)
             self.cursor_location = 0
         if key == tcod.event.K_RIGHT:
-            if not self.win_state:
+            if not self.end_state:
                 self.cursor_location += 1
         if key == tcod.event.K_LEFT:
-            if not self.win_state:
+            if not self.end_state:
                 self.cursor_location -= 1
         if key == tcod.event.K_UP and self.state == game_state.game_play:
-            if not self.win_state:
+            if not self.end_state:
                 self.edit_guess[self.cursor_location] = (self.edit_guess[self.cursor_location] + 1) % 9
         if key == tcod.event.K_DOWN and self.state == game_state.game_play:
-            if not self.win_state:
+            if not self.end_state:
                 self.edit_guess[self.cursor_location] = (self.edit_guess[self.cursor_location] - 1) % 9
         return None
 
@@ -152,7 +154,7 @@ class MainGameHandler(Handler):
             else:  # If the game has a code_length and a code_repeat, generate code
                 self.code = ms.code_randomizer(self.code_length, self.code_repeat)
                 self.state = game_state.game_play
-                self.message_log.append(self.code)
+                self.message_log.append("Helpful Tip: Use the arrow keys to control the input device to the left")
         else:
             self.cursor_location %= self.code_length
             if self.current_guess is None:
@@ -160,6 +162,7 @@ class MainGameHandler(Handler):
                     self.edit_guess[0] %= 2
                 return None
             else:
+                checking = False
                 if any(i == '9' for i in self.current_guess) and not all(i == '9' for i in self.current_guess):
                     # Validates code, checks for lifeline where there shouldn't be
                     message = "Oops! You used a lifeline code where you maybe shouldn't have..."
@@ -191,8 +194,16 @@ class MainGameHandler(Handler):
                     self.active_lifeline = False
                 elif self.current_guess == self.code:                       # Player guesses correct code
                     self.win_state = True
+                    self.end_state = True
+                    self.past_guesses[self.turn_counter] = self.edit_guess
                     message = f"You won in {self.turn_counter + 1} turns! Press ESC to return to menu."
+                elif (self.turn_counter >= 9 or self.end_state) and not self.win_state:
+                    self.end_state = True
+                    self.past_guesses[self.turn_counter] = self.edit_guess
+                    message = f"You lost. The code was {self.code}. Press ESC to return to menu."
+                    self.message_log.append(message)
                 else:                                                       # Player enters an incorrect guess
+                    checking = True
                     red, white = ms.code_checker(self.current_guess, self.code)
                     to_red = f"{tcod.COLCTRL_FORE_RGB:c}{constants.red[0]:c}{constants.red[1]:c}{constants.red[2]:c}"
                     to_white = f"{tcod.COLCTRL_FORE_RGB:c}{constants.white[0]:c}{constants.white[1]:c}{constants.white[2]:c}"
@@ -201,7 +212,7 @@ class MainGameHandler(Handler):
                     self.turn_iterator()
 
                 # Resets relevant variables for reuse in next turn
-                if not self.message_log[len(self.message_log) - 1] == message:  # Checks if the message repeats
+                if not self.message_log[len(self.message_log) - 1] == message or checking:  # Checks if the message repeats
                     self.message_log.append(message)
                 self.current_guess = None
                 self.edit_guess = [0 for i in range(8)]
@@ -273,7 +284,7 @@ class MainGameHandler(Handler):
                     bg=constants.gray if self.cursor_location == i else constants.black
                 )
 
-            for i in range(len(self.past_guesses)):
+            for i in range(min(len(self.past_guesses), 10)):
                 for j in range(len(self.past_guesses[i])):
                     entry = self.past_guesses[i][j]
                     if entry != 9:
