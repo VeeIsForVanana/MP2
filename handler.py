@@ -244,8 +244,8 @@ class MainGameHandler(Handler):
                             1 + (2 * j),
                             6 + (2 * i),
                             "*",
-                            bg=constants.code_colors[((i + j) % (self.cursor_location + 4)) + 1],
-                            fg=constants.black if constants.code_colors[((i + j) % (self.cursor_location + 4)) + 1] !=
+                            bg=constants.code_colors[((i + j) % (self.cursor_location + 4))],
+                            fg=constants.black if constants.code_colors[((i + j) % (self.cursor_location + 4))] !=
                                constants.black else constants.white
                         )
             elif self.code_repeat is None:  # If the game has not yet decided repeat or not (STEP 2)
