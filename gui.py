@@ -1,5 +1,4 @@
 import tcod
-import mastermind as ms
 import enum
 import handler
 import constants
