@@ -103,7 +103,7 @@ def code_checker(player_input, code):
         red_dict[i] = red_dict.get(i, 0) + 1
     for i in range(len(player_input)):
         red += int(player_input[i] == code[i])      # I am far too proud of this addition - v
-        red_dict[player_input[i]] -= int(player_input[i] == code[i])
+        red_dict[code[i]] -= int(player_input[i] == code[i])
         white += int(player_input[i] in code and red_dict[player_input[i]] != 0)
     return red, white
 
@@ -115,8 +115,8 @@ def lifeline1(code):
     """
     import random
     element = random.choice(list(code))
-    print(f"The element {element} exists somewhere... but where I wonder.")
-    return None
+    return (f"The element {element} exists somewhere... but where I wonder.")
+
 
 def lifeline2(code):
     """
@@ -126,8 +126,7 @@ def lifeline2(code):
     """
     import random
     position = random.randint(1, len(code))
-    print(f"The element {code[position - 1]} exists at position {position}.")
-    return position - 1
+    return (f"The element {code[position - 1]} exists at position {position}."), position - 1
 
 
 if __name__ == "__main__":
@@ -158,7 +157,7 @@ if __name__ == "__main__":
                 player_input = None
                 print("Lifeline 2 can no longer be used.")
             elif player_input is None:
-                print("Please enter a color code or ask for a valid lifeline.")
+                print("Please enter a color code or ask for a valid lifeline (lifeline#1 or lifeline#2).")
             print()
 
         # Handle user input. First try to treat it as a lifeline, afterward pass it through a code checker.
@@ -167,13 +166,14 @@ if __name__ == "__main__":
             print("Lifeline 1 Activated... but at what cost?")
             used_lifeline1 = True
             turns += lifeline1_loss
-            lifeline1(code)
+            print(lifeline1(code))
         elif player_input == "lifeline#2":
             print("Lifeline 2 Activated... you feel the time drain away.")
             used_lifeline2 = True
             turns += lifeline2_loss
             visible_code = list(visible_code)
-            index = lifeline2(code)
+            message, index = lifeline2(code)
+            print(message)
             visible_code[index] = code[index]
             visible_code = "".join(visible_code)
         else:
