@@ -33,15 +33,17 @@ class MenuHandler(Handler):
         elif key == tcod.event.K_UP:
             self.cursor_position = max(1, self.cursor_position - 1)
         elif key == tcod.event.K_DOWN:
-            self.cursor_position = min(3, self.cursor_position + 1)
+            self.cursor_position = min(2, self.cursor_position + 1)
         elif key == tcod.event.K_RETURN:
             if self.cursor_position == 1:
                 return MainGameHandler(self.console)
+            elif self.cursor_position == 2:
+                raise SystemExit()
         return None
 
     def on_render(self):
         printing_base = constants.window_height // 3  # This is the height of the first line to be printed
-        self.console.print(constants.window_width // 2 - 6, printing_base, "MASTERMIND")
+        self.console.print(constants.window_width // 2 - 5, printing_base, "MASTERMIND")
         self.console.print(
             constants.window_width // 2 - 2,
             printing_base + 2,
@@ -50,22 +52,22 @@ class MenuHandler(Handler):
             bg=constants.white if self.cursor_position == 1 else constants.black)
         self.console.print(
             constants.window_width // 2 - 2,
-            printing_base + 3,
-            "Help",
-            fg=constants.black if self.cursor_position == 2 else constants.white,
-            bg=constants.white if self.cursor_position == 2 else constants.black)
-        self.console.print(
-            constants.window_width // 2 - 2,
             printing_base + 4,
             "Quit",
-            fg=constants.black if self.cursor_position == 3 else constants.white,
-            bg=constants.white if self.cursor_position == 3 else constants.black)
+            fg=constants.black if self.cursor_position == 2 else constants.white,
+            bg=constants.white if self.cursor_position == 2 else constants.black)
         self.console.draw_frame(
             0,
             (constants.window_height // 5) * 4,
             constants.window_width,
             constants.window_height - (constants.window_height // 5) * 4,
             "Helpful Tip!")
+        self.console.print(
+            constants.window_width // 2 - 25,
+            ((constants.window_height // 5) * 4) + 2,
+            "There are no helpful tips. Turn back while you can.",
+            fg=constants.orange
+        )
         return self.console
 
 
