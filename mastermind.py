@@ -157,6 +157,8 @@ def main():
 
         while player_input is None:
             print(f"Turn #: {turns}")
+            print(f"lifeline#1: {'AVAILABLE' if not used_lifeline1 else 'USED UP'}")
+            print(f"lifeline#2: {'AVAILABLE' if not used_lifeline2 else 'USED UP'}")
             print(f"Code  : {visible_code}")
             player_input = code_input_validation(len(code), [chr(i + ord("0")) for i in usable_colors], input("Guess : "))
             if player_input == "lifeline#1" and used_lifeline1:
