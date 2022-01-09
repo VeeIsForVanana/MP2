@@ -106,9 +106,9 @@ def code_checker(player_input, code):
     for i in range(len(player_input)):
         red += int(player_input[i] == code[i])      # I am far too proud of this addition - v
         red_dict[code[i]] -= int(player_input[i] == code[i])
-    for i in player_input:
-        white += int(i in code and red_dict[i] > 0)
-        red_dict[i] -= int(i in code and red_dict[i] > 0)
+    for i in range(len(player_input)):
+        white += int(player_input[i] in code and red_dict[player_input[i]] > 0 and not player_input[i] == code[i])
+        red_dict[player_input[i]] -= int(player_input[i] in code and red_dict[player_input[i]] > 0 and not player_input[i] == code[i])
     return red, white
 
 def lifeline1(code):
@@ -146,6 +146,7 @@ if __name__ == "__main__":
     length = set_length()
 
     code = code_randomizer(length, set_repeat())
+    code = "8857"
 
     visible_code = visible_code_generator(length)
 
@@ -157,7 +158,7 @@ if __name__ == "__main__":
 
         while player_input is None:
             print(f"Turn #: {turns}")
-            print(f"Code  : {visible_code}")
+            print(f"Code  : {code}")
             player_input = code_input_validation(len(code), [chr(i + ord("0")) for i in usable_colors], input("Guess : "))
             if player_input == "lifeline#1" and used_lifeline1:
                 player_input = None
