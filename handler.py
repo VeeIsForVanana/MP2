@@ -100,13 +100,16 @@ class MainGameHandler(Handler):
         self.active_lifeline = False
         self.temporary_length = 1
         self.end_state = False
+        self.pre_quit = False
 
     def ev_keydown(self, event):
         key = event.sym
         if key == tcod.event.K_ESCAPE:
-            if self.end_state:
+            if self.end_state or self.pre_quit:
                 return MenuHandler(self.console)
-            raise SystemExit()
+            self.pre_quit = True
+            self.message_log.append("Are you sure you want to quit? Press ESC again to confirm.")
+            return None
         if key == tcod.event.K_RETURN:
             if self.state == game_state.game_setup:
                 if self.code_length is None:
@@ -137,6 +140,9 @@ class MainGameHandler(Handler):
         if key == tcod.event.K_DOWN and self.state == game_state.game_play:
             if not self.end_state:
                 self.edit_guess[self.cursor_location] = (self.edit_guess[self.cursor_location] - 1) % 9
+        if self.pre_quit:
+            self.message_log.append("I guess you didn't want to go after all.")
+            self.pre_quit = False
         return None
 
     def turn_iterator(self):
@@ -229,7 +235,7 @@ class MainGameHandler(Handler):
         self.update_game()
         self.render_background()
         printing_base = (18, 1)  # Sets a reliable variable for where the message_log should start
-        for i in range(len(self.message_log)):  # Prints the message log
+        for i in range(min(len(self.message_log), 24)):  # Prints the message log
             self.console.print(printing_base[0], printing_base[1] + i, self.message_log[i], fg=constants.orange)
         if self.state == game_state.game_setup:  # When the game is at the setup stage
             if self.code_length is None:  # If the game has not yet set up a code (STEP 1)
