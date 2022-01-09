@@ -235,8 +235,10 @@ class MainGameHandler(Handler):
         self.update_game()
         self.render_background()
         printing_base = (18, 1)  # Sets a reliable variable for where the message_log should start
-        for i in range(min(len(self.message_log), 24)):  # Prints the message log
-            self.console.print(printing_base[0], printing_base[1] + i, self.message_log[i], fg=constants.orange)
+        for i in range(min(len(self.message_log), 24)):
+            # Prints the message log up to a certain length, then scrolls
+            messages = self.message_log[max(0, len(self.message_log) - 24):]
+            self.console.print(printing_base[0], printing_base[1] + i, messages[i], fg=constants.orange)
         if self.state == game_state.game_setup:  # When the game is at the setup stage
             if self.code_length is None:  # If the game has not yet set up a code (STEP 1)
                 for i in range(3, 8):
