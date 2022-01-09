@@ -133,7 +133,7 @@ def lifeline2(code):
     return (f"The element {code[position - 1]} exists at position {position}."), position - 1
 
 
-if __name__ == "__main__":
+def main():
 
     # Game setup
 
@@ -207,3 +207,16 @@ if __name__ == "__main__":
               "and when you do, we will see if luck shall favor you again")
     else:
         print(f"I have beaten you. Now do you see, feeble flesh-mind, why I am the Mastermind? Code: {code}")
+
+    player_input = None
+
+    while player_input is None:
+        player_input = input_validation(["yes", "no"], input("Do you dare challenge me again, flesh-mind? (Yes/No)").lower())
+
+    if player_input == "yes":
+        main()
+    else:
+        raise SystemExit()
+
+if __name__ == "__main__":
+    main()
