@@ -59,8 +59,11 @@ Define a function to randomize a code, taking a length and whether the code repe
   
 Define a function to check the computer's code against the player's guess, taking both as input:
   The function creates a dictionary with the colors as keys and the number of their occurences in the computer's code.
-  The function traverses both the code and guess and stores the number of exact matches as "red". For each exact match of a color, 1 is subtracted from its corresponding entry in the dictionary.
-  The function traverses the player's guess only and stores the number of times the colors in the player's guess appears in the code (excepting the already-present exact matches) as long as the dictionary entry for that color is not zero or less. Then it subtracts this count from the corresponding dictionary entry. The count is also stored as "white".
+  The function traverses both the code and guess and stores the number of exact matches as "red". For each exact match of a color, 1 is subtracted from 
+  its corresponding entry in the dictionary.
+  The function traverses the player's guess only and stores the number of times the colors in the player's guess appears in the code (excepting the 
+  already-present exact matches) as long as the dictionary entry for that color is not zero or less. Then it subtracts this count from the corresponding 
+  dictionary entry. The count is also stored as "white".
   The function returns red and white as results.
   
 Define a function to handle lifeline 1, taking only the computer's code as input:
