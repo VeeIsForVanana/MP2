@@ -27,9 +27,10 @@ This project's GUI implementation requires the tcod python package. Install it u
 The directory containing this project will contain two scripts of interest:
 
 - `mastermind.py` Contains the base implementation of the game, with minimum features as detailed in the project specifications.
-- `gui.py` Contains an implementation of the game that makes use of a graphical user interface courtesy of the tcod package. This implementation makes use of concepts not taught in the CS11 curriculum such as classes, inheritance, and enums. These concepts were used out of sheer necessity due to the complex demands of the GUI implementation. This script has two dependencies contained in the project:
+- `gui.py` Contains an implementation of the game that makes use of a graphical user interface courtesy of the tcod package. This implementation makes use of concepts not taught in the CS11 curriculum such as classes, inheritance, and enums. These concepts were used out of sheer necessity due to the complex demands of the GUI implementation. This script has three dependencies contained in the project:
   - `handler.py` Contains an implementation of event handler classes inherited from the tcod package. Said handlers also handle most of the game's logic.
   - `constants.py` Contains vital game data detailing color data and window size.
+  - `mastermind.py` Along with being the gui-less game implementation, some functions in this script are borrowed by the gui implementation for the game logic
 
 Both implementations will be documented in separate sections of this document.
 
@@ -57,7 +58,18 @@ At the start of every turn, the computer will prompt the user to input their val
 inputting a guess for the computer's code or to ask for a lifeline by inputting "lifeline#1" or "lifeline#2". The game
 will loop until a valid input is entered.
 
-When a valid guess is entered, it will be checked against the computer's code.  
+When a valid guess is entered, it will be checked against the computer's code. Feedback will be given as follows:
+- `Red: x` when the player's input matches the computer's code exactly at x positions
+- `White: y` when the player's input has elements in the computer's code that are not in the right place at y positions
+
+If a lifeline is asked for, feedback will be as follows:
+- `lifeline#1` gives the player the value of a random element, but not the position. As a penalty, the player's turns increment by 1
+- `lifeline#2` gives the player the value and position of a random element. It then changes the hint code to reflect this. As a penalty, the player's turns increment by 2
+
+When the player's turns prevent them from taking a certain lifeline without immediately losing the game afterward, the 
+game blocks use of that lifeline.
+
+### User Manual 2: `gui.py`
 
 ## Implementations
 
@@ -159,7 +171,19 @@ If win (if the player has won):
     Print congratulatory message
 Else (if turns >= 10 and the player has not yet won):
     Print loss message
+    
+Set player_input to None
+
+While player_input is None:
+  Ask the player if they want to play again, validate lowercase of input against "yes" or "no"
+  
+If the player asks to play again:
+  Execute the whole game loop again.
+Else:
+  Exit
 
 END        
 ```
+
+#### Implementation 2: `gui.py`
 
