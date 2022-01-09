@@ -99,12 +99,16 @@ def code_checker(player_input, code):
     """
     red, white = 0, 0
     red_dict = {}
+    for i in range(1, 9):
+        red_dict[str(i)] = 0
     for i in code:
         red_dict[i] = red_dict.get(i, 0) + 1
     for i in range(len(player_input)):
         red += int(player_input[i] == code[i])      # I am far too proud of this addition - v
         red_dict[code[i]] -= int(player_input[i] == code[i])
-        white += int(player_input[i] in code and red_dict[player_input[i]] != 0)
+    for i in player_input:
+        white += int(i in code and red_dict[i] > 0)
+        red_dict[i] -= int(i in code and red_dict[i] > 0)
     return red, white
 
 def lifeline1(code):
