@@ -146,7 +146,6 @@ if __name__ == "__main__":
     length = set_length()
 
     code = code_randomizer(length, set_repeat())
-    code = "8857"
 
     visible_code = visible_code_generator(length)
 
@@ -158,7 +157,7 @@ if __name__ == "__main__":
 
         while player_input is None:
             print(f"Turn #: {turns}")
-            print(f"Code  : {code}")
+            print(f"Code  : {visible_code}")
             player_input = code_input_validation(len(code), [chr(i + ord("0")) for i in usable_colors], input("Guess : "))
             if player_input == "lifeline#1" and used_lifeline1:
                 player_input = None
