@@ -206,4 +206,4 @@ if __name__ == "__main__":
         print("You, flesh-mind, have beaten me... but you will come again soon, \n "
               "and when you do, we will see if luck shall favor you again")
     else:
-        print("I have beaten you. Now do you see, feeble flesh-mind, why I am the Mastermind?")
+        print(f"I have beaten you. Now do you see, feeble flesh-mind, why I am the Mastermind? Code: {code}")
