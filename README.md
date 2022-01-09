@@ -39,7 +39,8 @@ This script implements the algorithm below. Do note that there is not an exact o
 Define a function to validate input taking a list of accepted inputs and the player input as parameters:
   The function returns the player input if it is in the list of accepted values. Otherwise it outputs nothing.
 
-Define a function to validate a color code input taking the desired code length, a list of accepted characters, and the player input as parameters:
+Define a function to validate a color code input taking the desired code length, a list of accepted characters, and the 
+ player input as parameters:
   The function returns the player input if it is of the desired length and if all its characters are accepted else
   The function returns a request for a lifeline if the player input is such else
   The function returns nothing
@@ -55,14 +56,79 @@ Define a function to request a valid player input for whether the code will repe
   The function only returns the input when valid.
 
 Define a function to randomize a code, taking a length and whether the code repeats colors or not as input:
-  The function returns either a random sequence of color codes if it may repeat codes or permutates the string of all codes and cuts down the length if not.
+  The function returns either a random sequence of color codes if it may repeat codes or permutates the string of all 
+   codes and cuts down the length if not.
   
 Define a function to check the computer's code against the player's guess, taking both as input:
   The function creates a dictionary with the colors as keys and the number of their occurences in the computer's code.
-  The function traverses both the code and guess and stores the number of exact matches as "red". For each exact match of a color, 1 is subtracted from its corresponding entry in the dictionary.
-  The function traverses the player's guess only and stores the number of times the colors in the player's guess appears in the code (excepting the already-present exact matches) as long as the dictionary entry for that color is not zero or less. Then it subtracts this count from the corresponding dictionary entry. The count is also stored as "white".
+  The function traverses both the code and guess and stores the number of exact matches as "red". For each exact match 
+  of a color, 1 is subtracted from its corresponding entry in the dictionary.
+  The function traverses the player's guess only and stores the number of times the colors in the player's guess appears
+   in the code (excepting the already-present exact matches) as long as the dictionary entry for that color is not zero 
+   or less. Then it subtracts this count from the corresponding dictionary entry. The count is also stored as "white".
   The function returns red and white as results.
   
 Define a function to handle lifeline 1, taking only the computer's code as input:
-  
+  The function picks a random element of the code and prints it out without location data.
+
+Define a function to handle lifeline 2, taking only the computer's code as input:
+  The function picks a random position in the code and prints it out with element data.
+  The function returns the position.
+
+
+~~MASTERMIND IMPLEMENTATION BEGINS HERE~~
+START
+
+Define the 'usable_colors' (by default integers 1 to 8)
+Define boolean values to track, all start as False:
+    Whether the player has won, 'win'
+    Whether the player has used lifeline1, 'used_lifeline1'
+    Whether the player has used lifeline2, 'used_lifeline2'
+Set integer values:
+    For how much a call of lifeline1 deducts from turns, 'lifeline1_loss' (by default 1)
+    For how much a call of lifeline2 deducts from turns, 'lifeline2_loss' (by default 2)
+
+Set 'length' to be None (an value)
+While 'length' is None (while 'length' is an invalid value):
+    Set 'length' to be the validated player length as in the function above.
+Set 'repeat' to be None (an value)
+While repeat is None (while 'repeat' is an invalid value):
+    Set 'repeat' to be the validated player repeat choice as in the function above.
+Randomize 'code' using the function defined above.
+Set 'turns' to be 1
+Set 'visible_code' to be a string of only '*' with length equal to code length 
+
+While turns <= 10 and the player has not won:
+    Set 'player_input' to be None (an invalid value)
+    While 'player_input' is None (while 'player_input' is invalid):
+        Print a prompt detailing turn count and a code hint (visible_code)
+        Set 'player_input' to be the validated code as in the function above
+        If the player asks for a lifeline x and the lifeline x has already been used ('used_lifelinex'):
+            Invalidate player_input by setting to None
+        Else if player input is still invalid (None):
+            Print a corrective message
+    
+    If the player requested for lifeline 1:
+        Execute function lifeline1 with argument 'code' as defined above
+        Add the specified 'lifeline1_loss' to 'turns' 
+    Else if the player requested for lifeline 2:
+        Execute function lifeline2 with argument 'code' as defined above. Take its return value as 'position'
+        Change the value of the character at 'position' of 'visible_code' to the element at 'position' in 'code'
+        Add the specified 'lifeline2_loss' to 'turns'
+    Else (if the player entered a validated guess):
+        Let 'red', 'white' be the variable outputs of the code checking between 'player_input' and 'code' 
+         as defined above
+        If 'red' is the same as the length of the code (i.e. if there is a one-to-one match across the full length):
+            The player has won. Set 'win' to True
+        Else:
+            Print out 'red' and 'white' in player-readable format.
+    Increment 'turn' by 1
+
+If win (if the player has won):
+    Print congratulatory message
+Else (if turns >= 10 and the player has not yet won):
+    Print loss message
+
+END        
 ```
+

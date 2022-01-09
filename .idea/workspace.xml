@@ -4,9 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="f8105da0-8e51-4a98-a3d2-a1ec9e394fb8" name="Changes" comment="Preempted message log issues by capping maximum messages displayed. Added local quit from game option. If ESC pressed twice, game quits.">
+    <list default="true" id="f8105da0-8e51-4a98-a3d2-a1ec9e394fb8" name="Changes" comment="Message log solution had a bug. Implemented new solution without bugs.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/handler.py" beforeDir="false" afterPath="$PROJECT_DIR$/handler.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mastermind.py" beforeDir="false" afterPath="$PROJECT_DIR$/mastermind.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -49,7 +50,7 @@
     <property name="node.js.selected.package.tslint" value="(autodetect)" />
     <property name="settings.editor.selected.configurable" value="editor.preferences.fonts.default" />
   </component>
-  <component name="RunManager" selected="Python.gui">
+  <component name="RunManager" selected="Python.mastermind">
     <configuration name="gui" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="MP2" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -96,8 +97,8 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Python.gui" />
         <item itemvalue="Python.mastermind" />
+        <item itemvalue="Python.gui" />
       </list>
     </recent_temporary>
   </component>
@@ -117,7 +118,7 @@
       <workItem from="1641560568226" duration="19000" />
       <workItem from="1641609189329" duration="23985000" />
       <workItem from="1641648937794" duration="25000" />
-      <workItem from="1641696088259" duration="2857000" />
+      <workItem from="1641696088259" duration="7618000" />
     </task>
     <task id="LOCAL-00001" summary="First commit.">
       <created>1640517969884</created>
@@ -217,7 +218,14 @@
       <option name="project" value="LOCAL" />
       <updated>1641698584909</updated>
     </task>
-    <option name="localTasksCounter" value="15" />
+    <task id="LOCAL-00015" summary="Message log solution had a bug. Implemented new solution without bugs.">
+      <created>1641699311240</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1641699311240</updated>
+    </task>
+    <option name="localTasksCounter" value="16" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -252,22 +260,12 @@
     <MESSAGE value="Livened up start-up screen. Removed help option because no help is coming." />
     <MESSAGE value="Detected red-white duplication bug. Bug resolved with commit." />
     <MESSAGE value="Preempted message log issues by capping maximum messages displayed. Added local quit from game option. If ESC pressed twice, game quits." />
-    <option name="LAST_COMMIT_MESSAGE" value="Preempted message log issues by capping maximum messages displayed. Added local quit from game option. If ESC pressed twice, game quits." />
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/handler.py</url>
-          <line>237</line>
-          <option name="timeStamp" value="5" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
+    <MESSAGE value="Message log solution had a bug. Implemented new solution without bugs." />
+    <option name="LAST_COMMIT_MESSAGE" value="Message log solution had a bug. Implemented new solution without bugs." />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/MP2$mastermind.coverage" NAME="mastermind Coverage Results" MODIFIED="1641697684940" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/MP2$mastermind.coverage" NAME="mastermind Coverage Results" MODIFIED="1641709156113" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/MP2$main.coverage" NAME="main Coverage Results" MODIFIED="1641222989459" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/MP2$gui.coverage" NAME="gui Coverage Results" MODIFIED="1641699007205" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/MP2$gui.coverage" NAME="gui Coverage Results" MODIFIED="1641709151513" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
 </project>

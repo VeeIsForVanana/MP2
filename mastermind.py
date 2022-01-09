@@ -134,6 +134,9 @@ def lifeline2(code):
 
 
 if __name__ == "__main__":
+
+    # Game setup
+
     usable_colors = (1, 2, 3, 4, 5, 6, 7, 8)
     win = False
     used_lifeline1, used_lifeline2 = False, False
@@ -145,6 +148,8 @@ if __name__ == "__main__":
     code = code_randomizer(length, set_repeat())
 
     visible_code = visible_code_generator(length)
+
+    # Game loop
 
     while turns <= 10 and not win:
         # Accept and validate player input
