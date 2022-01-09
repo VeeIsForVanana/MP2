@@ -4,10 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="f8105da0-8e51-4a98-a3d2-a1ec9e394fb8" name="Changes" comment="Message log solution had a bug. Implemented new solution without bugs.">
+    <list default="true" id="f8105da0-8e51-4a98-a3d2-a1ec9e394fb8" name="Changes" comment="Documentation. Completed implementation for mastermind.py.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mastermind.py" beforeDir="false" afterPath="$PROJECT_DIR$/mastermind.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -22,6 +21,7 @@
     </option>
   </component>
   <component name="Git.Settings">
+    <option name="PUSH_AUTO_UPDATE" value="true" />
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
         <entry key="$PROJECT_DIR$" value="game_implementation" />
@@ -118,7 +118,8 @@
       <workItem from="1641560568226" duration="19000" />
       <workItem from="1641609189329" duration="23985000" />
       <workItem from="1641648937794" duration="25000" />
-      <workItem from="1641696088259" duration="7618000" />
+      <workItem from="1641696088259" duration="11758000" />
+      <workItem from="1641778672995" duration="562000" />
     </task>
     <task id="LOCAL-00001" summary="First commit.">
       <created>1640517969884</created>
@@ -225,7 +226,14 @@
       <option name="project" value="LOCAL" />
       <updated>1641699311240</updated>
     </task>
-    <option name="localTasksCounter" value="16" />
+    <task id="LOCAL-00016" summary="Documentation. Completed implementation for mastermind.py.">
+      <created>1641709896714</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1641709896714</updated>
+    </task>
+    <option name="localTasksCounter" value="17" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -261,7 +269,8 @@
     <MESSAGE value="Detected red-white duplication bug. Bug resolved with commit." />
     <MESSAGE value="Preempted message log issues by capping maximum messages displayed. Added local quit from game option. If ESC pressed twice, game quits." />
     <MESSAGE value="Message log solution had a bug. Implemented new solution without bugs." />
-    <option name="LAST_COMMIT_MESSAGE" value="Message log solution had a bug. Implemented new solution without bugs." />
+    <MESSAGE value="Documentation. Completed implementation for mastermind.py." />
+    <option name="LAST_COMMIT_MESSAGE" value="Documentation. Completed implementation for mastermind.py." />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/MP2$mastermind.coverage" NAME="mastermind Coverage Results" MODIFIED="1641709156113" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />

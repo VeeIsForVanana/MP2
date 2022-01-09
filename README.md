@@ -10,9 +10,11 @@ Reyes, Victor Edwin <br>
 
 ## Introduction
 
-This document is made as external documentation of the algorithms and logic underpinning our implementation of the Mastermind Game. The User Manual for lay users explaining how to play the game is located in a section of the document.
+This document is made as external documentation of the algorithms and logic underpinning our implementation of the 
+Mastermind Game. The User Manual for lay users explaining how to play the game is also located in this document.
 
-In case this project was distributed by other means, this project also has a GitHub repository here: https://github.com/VeeIsForVanana/MP2
+In case this project was distributed by other means, this project also has a GitHub repository here: 
+https://github.com/VeeIsForVanana/MP2
 
 ## About the Project
 
@@ -31,9 +33,38 @@ The directory containing this project will contain two scripts of interest:
 
 Both implementations will be documented in separate sections of this document.
 
-## Implementation 1: `mastermind.py`
+## User Manual
 
-This script implements the algorithm below. Do note that there is not an exact one-to-one correspondence between the code and this algorithm.
+### User Manual 1: `mastermind.py`
+
+This script makes use primarily of text inputs and a textual interface. 
+The program solely implements Mastermind with some added features.
+Guiding prompts are in all parts of the program, but this manual will still provide a detailed guide into the game.
+
+The game opens with prompts asking for required parameters (code length, and whether colors will repeat) 
+for the game setup. Input is validated and the request will loop until it receives what is considered valid input. By
+default, length is expected to be within 4 and 8, inclusive. Meanwhile, repeat will always be either "Yes" or "No".
+
+Afterward, the game proper will start. 
+
+To summarize, in Mastermind, the player is expected to make guesses what the computer-generated code is. Said code will 
+consist of "colors" (numbers from 1 to 8 by default). The player is expected to match this code with their guess to win 
+the game. Otherwise, if they fail to do so within ten turns, they lose. When the player inputs a guess, the computer 
+prints out feedback in the form of "Red" and "White" numbers, based on which they may alter their input. They may also
+make use of lifelines, as shall be detailed below.
+
+At the start of every turn, the computer will prompt the user to input their valid guess. The player has the option of
+inputting a guess for the computer's code or to ask for a lifeline by inputting "lifeline#1" or "lifeline#2". The game
+will loop until a valid input is entered.
+
+When a valid guess is entered, it will be checked against the computer's code.  
+
+## Implementations
+
+### Implementation 1: `mastermind.py`
+
+This script implements the algorithm below. Do note that there is not an exact one-to-one correspondence between the 
+code and this algorithm.
 
 ```
 Define a function to validate input taking a list of accepted inputs and the player input as parameters:
