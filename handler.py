@@ -176,12 +176,12 @@ class MainGameHandler(Handler):
                 if any(i == '9' for i in self.current_guess) and not all(i == '9' for i in self.current_guess):
                     # Validates code, checks for lifeline where there shouldn't be
                     message = "Oops! You used a lifeline code where you maybe shouldn't have..."
-                elif all(i == '9' for i in self.current_guess) and not (self.lifeline1 and self.lifeline2): # Lifelines activated
+                elif all(i == '9' for i in self.current_guess) and not (self.lifeline1 or self.lifeline2): # Lifelines activated
                     message = "Choose a lifeline using the code input. There is no going back."
                     self.active_lifeline = True
                     self.code_length, self.temporary_length = self.temporary_length, self.code_length
-                elif all(i == '9' for i in self.current_guess) and (self.lifeline1 and self.lifeline2):
-                    message = "You have already used up all your lifelines."
+                elif all(i == '9' for i in self.current_guess) and (self.lifeline1 or self.lifeline2):
+                    message = "You have already used up your lifeline."
                 elif self.active_lifeline:                                  # Lifeline active and input given
                     lifeline_code = [9 for i in range(8)]
                     if self.current_guess == "1" and not self.lifeline1:
@@ -318,7 +318,7 @@ class MainGameHandler(Handler):
             # Render past guesses
 
             for i in range(min(len(self.past_guesses), 10)):
-                for j in range(len(self.past_guesses[i])):
+                for j in range(len(self.past_guesses[i][0:self.code_length])):
                     entry = self.past_guesses[i][j]
                     if entry != 9:
                         self.console.print(

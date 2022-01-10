@@ -139,7 +139,7 @@ def main():
 
     usable_colors = (1, 2, 3, 4, 5, 6, 7, 8)
     win = False
-    used_lifeline1, used_lifeline2 = False, False
+    used_lifeline = False
     lifeline1_loss, lifeline2_loss = 1, 2
     turns = 1
 
@@ -157,14 +157,14 @@ def main():
 
         while player_input is None:
             print(f"Turn #: {turns}")
-            print(f"lifeline#1: {'AVAILABLE' if not used_lifeline1 else 'USED UP'}")
-            print(f"lifeline#2: {'AVAILABLE' if not used_lifeline2 else 'USED UP'}")
+            print(f"lifeline#1: {'AVAILABLE' if not used_lifeline else 'USED UP'}")
+            print(f"lifeline#2: {'AVAILABLE' if not used_lifeline else 'USED UP'}")
             print(f"Code  : {visible_code}")
             player_input = code_input_validation(len(code), [chr(i + ord("0")) for i in usable_colors], input("Guess : "))
-            if player_input == "lifeline#1" and used_lifeline1:
+            if player_input == "lifeline#1" and (used_lifeline or 10 - turns <= lifeline1_loss + 1):
                 player_input = None
                 print("Lifeline 1 can no longer be used.")
-            elif player_input == "lifeline#2" and used_lifeline2:
+            elif player_input == "lifeline#2" and (used_lifeline or 10 - turns <= lifeline2_loss + 1):
                 player_input = None
                 print("Lifeline 2 can no longer be used.")
             elif player_input is None:
@@ -175,12 +175,12 @@ def main():
 
         if player_input == "lifeline#1":
             print("Lifeline 1 Activated... but at what cost?")
-            used_lifeline1 = True
+            used_lifeline = True
             turns += lifeline1_loss
             print(lifeline1(code))
         elif player_input == "lifeline#2":
             print("Lifeline 2 Activated... you feel the time drain away.")
-            used_lifeline2 = True
+            used_lifeline = True
             turns += lifeline2_loss
             visible_code = list(visible_code)
             message, index = lifeline2(code)
@@ -194,11 +194,10 @@ def main():
             else:
                 print(f"Red: {red}\nWhite: {white}")
 
-        if 10 - turns <= lifeline1_loss + 1 and not used_lifeline1:
-            used_lifeline1 = True
+        if 10 - turns <= lifeline1_loss + 1 and not used_lifeline:
             print("Your chance to use your first lifeline has come and gone.")
-        elif 10 - turns <= lifeline2_loss + 1 and not used_lifeline2:
-            used_lifeline2 = True
+        elif 10 - turns <= lifeline2_loss + 1 and not used_lifeline:
+            used_lifeline = True
             print("Your chance to use your second lifeline has come and gone.")
 
         turns += 1
