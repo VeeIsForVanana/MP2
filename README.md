@@ -27,10 +27,10 @@ This project's GUI implementation requires the tcod python package. Install it u
 The directory containing this project will contain two scripts of interest:
 
 - `mastermind.py` Contains the base implementation of the game, with minimum features as detailed in the project specifications.
-- `gui.py` Contains an implementation of the game that makes use of a graphical user interface courtesy of the tcod package. This implementation makes use of concepts not taught in the CS11 curriculum such as classes, inheritance, and enums. These concepts were used out of sheer necessity due to the complex demands of the GUI implementation. This script has three dependencies contained in the project:
-  - `handler.py` Contains an implementation of event handler classes inherited from the tcod package. Said handlers also handle most of the game's logic.
-  - `constants.py` Contains vital game data detailing color data and window size.
-  - `mastermind.py` Along with being the gui-less game implementation, some functions in this script are borrowed by the gui implementation for the game logic
+  - `gui.py` Contains an implementation of the game that makes use of a graphical user interface courtesy of the tcod package. This implementation makes use of concepts not taught in the CS11 curriculum such as classes, inheritance, and enums. These concepts were used out of sheer necessity due to the complex demands of the GUI implementation. This script has three dependencies contained in the project:
+    - `handler.py` Contains an implementation of event handler classes inherited from the tcod package. Said handlers also handle most of the game's logic.
+    - `constants.py` Contains vital game data detailing color data and window size.
+    - `mastermind.py` Along with being the gui-less game implementation, some functions in this script are borrowed by the gui implementation for the game logic
 
 Both implementations will be documented in separate sections of this document.
 
@@ -402,3 +402,7 @@ Define Keydown Event as a function taking an event as a parameter when event is 
 ```
 
 ## Resources
+
+_Welcome to the python-tcod documentation! — python-tcod 13.3.0 documentation._ (2009). Python-Tcod. Retrieved January 10, 2022, from https://python-tcod.readthedocs.io/en/latest/index.html
+
+_Welcome to the Roguelike Tutorial Revised._ (2020, July 7). Roguelike Tutorials. http://rogueliketutorials.com/
