@@ -273,6 +273,9 @@ class MainGameHandler(Handler):
             guess_printing_base = (1, 2)  # Where printing the current guess takes place
             past_printing_base = (1, 6)  # Where printing past guesses takes place
 
+            # Displaying highlighted up arrows for the length of the active guess (within the code_length)
+            # Only up and down arrows are highlighted when cursor location is on them.
+
             for i in range(self.code_length):
                 self.console.print(
                     1 + (2 * i),
@@ -281,6 +284,8 @@ class MainGameHandler(Handler):
                     fg=constants.white,
                     bg=constants.gray if self.cursor_location == i else constants.black
                 )
+
+            # Displaying the selected digits of the guess
 
             for i in range(self.code_length):
                 entry = int(self.edit_guess[i])
@@ -293,9 +298,13 @@ class MainGameHandler(Handler):
                     fg=constants.white if constants.code_colors[entry] == constants.black else constants.black
                 )
 
+            # Render LIFELINE for the whole guess when all characters correspond
+
             if not any([i != 8 for i in self.edit_guess[0: self.code_length]]):
                 for i in range(len("LIFELINE")):
                     self.console.print(1 + (i * 2), 2, "LIFELINE"[i], bg=constants.gray)
+
+            # Displaying highlighted down arrows for the length of the active guess (within the code_length)
 
             for i in range(self.code_length):
                 self.console.print(
@@ -305,6 +314,8 @@ class MainGameHandler(Handler):
                     fg=constants.white,
                     bg=constants.gray if self.cursor_location == i else constants.black
                 )
+
+            # Render past guesses
 
             for i in range(min(len(self.past_guesses), 10)):
                 for j in range(len(self.past_guesses[i])):

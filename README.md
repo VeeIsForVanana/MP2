@@ -272,4 +272,133 @@ asks the current Handler for what it wants to draw onto the console.
 The event handling then takes all events happening on the terminal. When a key is pressed, or the mouse is moved on the
 terminal, an "event" containing data about key identity, mouse location, etc. is passed to the handler's method for
 handling events. _Depending on what happens due to the event_ the handler type may change (e.g. moving from the Menu
-Handler to the Game Handler after the player presses enter.)
+Handler to the Game Handler after the player presses enter.). Note: The handler's function for handling events passes
+the event to another method more appropriate for handling the event (e.g. `ev_keydown(event)` for a keypress vs 
+`ev_mousemotion(event)` for a mouse movement).
+
+Let us now explore the Handler objects.
+
+##### Menu Handler
+
+```
+Set a variable inherent to the handler object "cursor_location" set to 0
+
+Define Render as a function taking no inputs:
+  Render a game screen consisting of a title, and a helpful tips box underneath.
+  Render two options "Play" and "Quit" in the middle of the screen. Whenever the cursor_location is 0, highlight the 
+  Play option by changing its background color and its foreground color. Similarly, when the cursor_location is 1,
+  highlight the Quit option.
+  Return this handler (Do not change the current handler)
+
+Define Keydown Event as a function taking an event as a parameter when event is a keydown event:
+  When the keydown pressed is up:
+    Decrement cursor_location if its value is not 0 or less
+  When the keydown pressed is down:
+    Increment cursor_location if its value is not 1 or more
+  When they keydown pressed is ENTER:
+    If the cursor_location is 0:
+      Return an instance of the handler type "MainGameHandler" with this handler's console as a property.
+      (Change the current handler)
+    If the cursor_location is 1:
+      Quit the game
+  Return this handler (Do not change the current handler)
+```
+
+##### Main Game Handler
+
+When the Main Game Handler is handling the game, it is expected that the game is thus active. This handler is extremely
+difficult to describe efficiently, and thus the algorithm described below has less accuracy corresponding to the actual
+code.
+
+```
+Set a variable inherent to the handler object "cursor_location" set to 0
+
+Define a function to update the game without any inputs:
+  If the game is in setup (no code generated):
+    Clear the message log
+    If the code length is not yet set:
+      Add a prompt to the message log for the length.
+    Else if the code repeat is not yet set:
+      Add a prompt to the message log for the length.
+    Else:
+      Generate the code and end the setup.
+      Add a helpful tip to the message log about navigation.
+  Else:
+    If there is no submitted guess:
+      Keep the cursor location (the selected digit index) within the bounds of the code length
+      Return nothing from the function (Ends the function prematurely)
+    Else: (When there is a submitted guess)
+      If the guess has an invalid character:
+        Add a message to the message log telling the user about the issue and asking for valid input
+        Do nothing else
+      Else if the guess is asking for a lifeline and lifelines can still be used:
+        Tell the program the player is asking for a lifeline (telling rendering function to change input system, etc.)
+      Else if the guess is asking for a lifeline and lifeliens are unavailabe:
+        Add a message to the message log telling the user about the issue and asking for valid input
+      Else if the player is asking for a lifeline (and the player has chosen a lifeline):
+        Run the respective lifeline if the player can use the lifelines, else add a message to the log about the issue
+          and do not continue
+        Iterate the turn counter for the required number of times.
+        Add "LIFELINE" to the list of past guesses for the lost turns.
+        Restore normal functionality to the input
+        Tell the program the player is no longer asking for a lifeline and normal behavior may resume
+      Else if the guess is equal to the code:
+        Tell the program the game is over.
+        Tell the program the player has won.
+        Add the guess to the list of past guesses
+        Congratulate the player
+      Else if ten turns have already passed and the player has not won:
+        Tell the program the game is over.
+        Add consolatory message to log.
+        Add the guess to the list of past guesses.
+      Else:
+        Check the guess and code using the function described in the mastermind.py implementation
+        Display red and white in their respective colors via the message log
+        Add the guess to the list of past guesses
+        Iterate turn once
+      Set the current guess to nothing
+      Set the guess being edited to its default ("1111...")
+        
+Define a Rendering function without inputs:
+  Use a function to update the game
+  Render the background (boxes with titles and past guesses as "0" and the up and down arrows for the input panel)
+  Render the input panel by highlighting the selected digit in gray and coloring the digits in use white and displaying 
+    the appropriate chosen digits with proper background color (taken from constants.py)
+  If for the allowed length of the guess, the ninth choice has been selected, overwrite the guess and display the
+    characters of "LIFELINE"
+  Render the past guesses by taking the list of past guesses and displaying them digit by digit from the top down
+  Render the message log, line by line up to a certain range. When the length of the message log exceeds what can be
+    shown by the window, display from the latest up to the furthest back the window can display.
+  
+Define Keydown Event as a function taking an event as a parameter when event is a keydown event:
+  If the key pressed is ESC:
+    If the player has already been warned about quitting or the game is over:
+      Return the Menu Handler (Returns to menu)
+    Warn the player via message log
+  If the game is over:
+    Prematurely end the function by returning self
+  If the key pressed is RIGHT ARROW:
+    Increment the cursor location by 1, keep it bound depending on what is being inputted (4 for code length, 1 for 
+      repeat, code length for guess)
+  If the key pressed is LEFT ARROW:
+    Decrement the cursor location by 1, keep it bound depending on what is being inputted (0 for all)
+  If the key pressed is UP ARROW and the player is inputting a guess:
+    Increment the digit of the guess at the cursor location by 1, keep the digit value bound from 1 to 9.
+  If the key pressed is DOWN ARROW and the player is inputting a guess:
+    Decrement the digit of the guess at the cursor location by 1, keep the digit value bound from 1 to 9.
+  If the key pressed is ENTER:
+    If the game is requesting for a code length:
+      Add 4 to cursor location and use this value as code length
+    If the game is requesting for repeat:
+      If cursor location is 0, repeat is "yes"
+      Else repeat is "no"
+    If the game is requesting for a code:
+      Submit the guess in the input panel and parse it as a string. Let the submitted guess be the elements of
+      this from 0 to the designated code length.
+    If the game is expecting a lifeline:
+      Submit the single digit being edited as the guess string.
+    Set cursor location to 0
+  Return self
+```
+
+## Resources
