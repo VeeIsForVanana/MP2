@@ -3,28 +3,6 @@ import enum
 import handler
 import constants
 
-class game_state(enum.Enum):
-    main_menu = enum.auto()
-    play_state = enum.auto()
-
-
-def on_render(current_state, window_width, window_height, console: tcod.Console):
-    """
-    Called with every run of the game loop
-    :param current_state: current state of the game before running this function
-    :param window_width: width of console
-    :param window_height: height of console
-    :param console: console object used to handle displaying of visual elements
-    """
-
-    if current_state == game_state.main_menu:
-        printing_base = window_height // 3      # This is the height of the first line to be printed
-        console.print(window_width // 2 - 6, printing_base, "MASTERMIND")
-        console.print(window_width // 2 - 2, printing_base + 2, "Play")
-        console.print(window_width // 2 - 2, printing_base + 3, "Quit")
-        console.draw_frame(0, (window_height // 5) * 4, window_width, window_height // 5, "Helpful Tip!")
-    return console
-
 
 def main():
     window_height = constants.window_height

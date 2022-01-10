@@ -4,8 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="f8105da0-8e51-4a98-a3d2-a1ec9e394fb8" name="Changes" comment="Corrected project structure.">
-      <change beforePath="$PROJECT_DIR$/mastermind.py" beforeDir="false" afterPath="$PROJECT_DIR$/mastermind.py" afterDir="false" />
+    <list default="true" id="f8105da0-8e51-4a98-a3d2-a1ec9e394fb8" name="Changes" comment="Added lifeline use indicator at start of turn.">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gui.py" beforeDir="false" afterPath="$PROJECT_DIR$/gui.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/handler.py" beforeDir="false" afterPath="$PROJECT_DIR$/handler.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -49,7 +52,7 @@
     <property name="node.js.selected.package.tslint" value="(autodetect)" />
     <property name="settings.editor.selected.configurable" value="editor.preferences.fonts.default" />
   </component>
-  <component name="RunManager" selected="Python.mastermind">
+  <component name="RunManager" selected="Python.gui">
     <configuration name="gui" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="MP2" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -96,8 +99,8 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Python.mastermind" />
         <item itemvalue="Python.gui" />
+        <item itemvalue="Python.mastermind" />
       </list>
     </recent_temporary>
   </component>
@@ -119,7 +122,7 @@
       <workItem from="1641648937794" duration="25000" />
       <workItem from="1641696088259" duration="11758000" />
       <workItem from="1641778672995" duration="562000" />
-      <workItem from="1641755596349" duration="3072000" />
+      <workItem from="1641755596349" duration="8593000" />
     </task>
     <task id="LOCAL-00001" summary="First commit.">
       <created>1640517969884</created>
@@ -275,7 +278,14 @@
       <option name="project" value="LOCAL" />
       <updated>1641758190069</updated>
     </task>
-    <option name="localTasksCounter" value="23" />
+    <task id="LOCAL-00023" summary="Added lifeline use indicator at start of turn.">
+      <created>1641764660154</created>
+      <option name="number" value="00023" />
+      <option name="presentableId" value="LOCAL-00023" />
+      <option name="project" value="LOCAL" />
+      <updated>1641764660154</updated>
+    </task>
+    <option name="localTasksCounter" value="24" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -317,11 +327,12 @@
     <MESSAGE value="Added hidden code reveal when lose." />
     <MESSAGE value="Added in-game replayability." />
     <MESSAGE value="Corrected project structure." />
-    <option name="LAST_COMMIT_MESSAGE" value="Corrected project structure." />
+    <MESSAGE value="Added lifeline use indicator at start of turn." />
+    <option name="LAST_COMMIT_MESSAGE" value="Added lifeline use indicator at start of turn." />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/MP2$mastermind.coverage" NAME="mastermind Coverage Results" MODIFIED="1641764621411" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/MP2$mastermind.coverage" NAME="mastermind Coverage Results" MODIFIED="1641766012235" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/MP2$main.coverage" NAME="main Coverage Results" MODIFIED="1641222989459" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/MP2$gui.coverage" NAME="gui Coverage Results" MODIFIED="1641709151513" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/MP2$gui.coverage" NAME="gui Coverage Results" MODIFIED="1641776342079" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
 </project>

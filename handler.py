@@ -63,9 +63,10 @@ class MenuHandler(Handler):
             constants.window_height - (constants.window_height // 5) * 4,
             "Helpful Tip!")
         self.console.print(
-            constants.window_width // 2 - 25,
+            constants.window_width // 2 - 27,
             ((constants.window_height // 5) * 4) + 2,
-            "There are no helpful tips. Turn back while you can.",
+            "  There are no helpful tips. Turn back while you can  \n"
+            "Also you can use the arrow and enter keys to navigate",
             fg=constants.orange
         )
         return self.console

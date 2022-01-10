@@ -71,6 +71,43 @@ game blocks use of that lifeline.
 
 ### User Manual 2: `gui.py`
 
+This script makes use of a graphical user interface to allow the user to interact with the game. The program implements
+Mastermind with some extra features that are not necessarily the same as those in `mastermind.py`. The game requires the
+player to use only the arrow and enter keys to navigate. 
+
+On launching, the player is met with the main menu screen. Here, they may navigate between the two options "Play" and 
+"Quit" using the arrow keys, and select using the ENTER key.
+
+As one might expect, "Quit" allows the player to exit the game. "Play" starts a new game of Mastermind.
+
+When the game starts, the player will encounter a screen with three sections. The section to the upper left is the code
+input screen. To the lower left is a panel to record the player's past guesses. The rightmost and largest panel is
+for the computer to communicate textually with the player. It should be noted that at any stage of play, the player may
+press ESC to try to leave the game, at which point the computer will confirm if they want to leave by pressing ESC again.
+
+At the very start of the round, the computer will ask the player to provide a length for the code (from 4 to 8) and then 
+whether the code will repeat or not. At each of these stages, the computer will provide the player with choices from 
+which to choose using the keyboard controls. The code will then be generated in the background and then the game will 
+begin.
+
+Like in `mastermind.py` the player must guess the computer's code within 10 turns. The player will input this using the
+input panel. The input panel will display the player's current unsubmitted guess, each digit of which the player may
+change using the arrow keys. The player can move the digit selector using the left and right arrows, and change the
+digit using the up (to increment by 1) and down (to decrement by 1) keys. The player may select from eight color-digits.
+A ninth option is reserved to input "LIFELINE", when the player selects this ninth digit for the length of their allowed
+guess, the program will complete "LIFELINE" for the rest of the guess (including unallowed digits). Do note that the
+LIFELINE digit is not compatible with other guess digits and if used in a guess, the player's guess will not be 
+recognized and they will be given a chance to reenter a valid guess.
+
+When the player presses ENTER, they submit their guess for evaluation by the computer. If their guess is an attempt at
+guessing the code, their guess will be evaluated and feedback will be returned (see User Manual for `mastermind.py`). 
+If their guess was asking for a lifeline, and they still have available lifelines, they will be allowed to specify their
+lifeline request by entering 1 or 2 in the modified input panel. They will then receive feedback corresponding to the 
+lifeline they selected as well as receiving a corresponding turn malus (also see User Manual for `mastermind.py`).
+
+When the player wins, or passes ten turns without winning, the corresponding congratulatory or consolatory is displayed 
+After this, the player may return to the main menu using ESC, from which they may start another game or quit.
+
 ## Implementations
 
 ### Implementation 1: `mastermind.py`
@@ -187,3 +224,52 @@ END
 
 #### Implementation 2: `gui.py`
 
+In the setup, the script sets up the tools used for rendering the game visually along with handling input
+
+```
+Import window height and window width from an outside list of constant values
+Load the image "dejavu10x10_gs_tc.png" as the tilesheet
+
+Set up a new terminal with window height and window width from the aforementioned variables and the loaded tileset and
+use the title "Mastermind MP2"
+
+Create a "console" object (functionally similar to a canvas) tailored for the terminal we are using.
+Create a "Menu Handler" object (a custom class) to handle input and the game logic and give it the 
+console as its property
+
+Enter an infinite loop ...
+```
+
+To elaborate on what just happened, the three most important concepts above are the terminal, which is the window itself;
+the console, which contains the graphics drawn onto the terminal; and the handler, which handles input and the game.
+
+The terminal will rarely be referenced hereafter except when it is instructed to render the console.
+
+The console is an object similar to a canvas with methods for drawing on itself (printing characters, tiles, etc.). It
+will be passed to the handler, which will use these methods to alter it and draw on it.
+
+The handler is an object (of the Menu Handler class) for now that has methods to handle and process key and mouse events,
+and that contains the logic of the game. These functionalities will especially be focused on later in this document.
+
+For now, let us continue and examine the contents of the game's infinite loop.
+
+```
+Clear the console in preparation for what is to be drawn next.
+Let the console be modified by the Manu Handler's rendering function.
+
+For all events (keypresses, mouse movement on the window) recognized by the terminal:
+  Pass the event to the Menu Handler and expect the Menu Handler to change into possibly a different object based on
+  what it returns
+  Draw the console onto the terminal
+```
+
+The game loop can be separated into two parts: the graphics rendering (the first two lines plus drawing onto the 
+terminal) and the event handling (the last two lines)
+
+The graphics rendering first clears the function (take note that the infinite loop passes very quickly). Then it
+asks the current Handler for what it wants to draw onto the console. 
+
+The event handling then takes all events happening on the terminal. When a key is pressed, or the mouse is moved on the
+terminal, an "event" containing data about key identity, mouse location, etc. is passed to the handler's method for
+handling events. _Depending on what happens due to the event_ the handler type may change (e.g. moving from the Menu
+Handler to the Game Handler after the player presses enter.)
